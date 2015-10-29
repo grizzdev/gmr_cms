@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Hash;
+use Auth;
+use Response;
 use Validator;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    protected $redirectPath = '/';
+    #protected $loginPath = '/login';
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -62,4 +72,13 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function postLogin(Request $request) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            return Response::json(['href' => url()]);
+        } else {
+            return Response::json(['error' => 'Invalid email or password']);
+        }
+    }
+
 }

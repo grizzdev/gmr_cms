@@ -1,12 +1,12 @@
 Agent
 =====
 
-[![Latest Stable Version](http://img.shields.io/github/release/jenssegers/agent.svg)](https://packagist.org/packages/jenssegers/agent) [![Total Downloads](http://img.shields.io/packagist/dm/jenssegers/agent.svg)](https://packagist.org/packages/jenssegers/agent) [![Build Status](http://img.shields.io/travis/jenssegers/agent.svg)](https://travis-ci.org/jenssegers/agent) [![Coverage Status](http://img.shields.io/coveralls/jenssegers/agent.svg)](https://coveralls.io/r/jenssegers/agent)
+[![Latest Stable Version](http://img.shields.io/packagist/v/jenssegers/agent.svg)](https://packagist.org/packages/jenssegers/agent) [![Total Downloads](http://img.shields.io/packagist/dm/jenssegers/agent.svg)](https://packagist.org/packages/jenssegers/agent) [![Build Status](http://img.shields.io/travis/jenssegers/agent.svg)](https://travis-ci.org/jenssegers/agent) [![Coverage Status](http://img.shields.io/coveralls/jenssegers/agent.svg)](https://coveralls.io/r/jenssegers/agent)
 
 A PHP desktop/mobile user agent parser with support for Laravel, based on [Mobile Detect](https://github.com/serbanghita/Mobile-Detect) with desktop support and additional functionality.
 
 <p align="center">
-<img src="http://jenssegers.be/uploads/images/agent.png?v2" height="275">
+<img src="http://jenssegers.be/uploads/images/agent.png?v4" height="275">
 </p>
 
 Installation
@@ -129,10 +129,18 @@ $browser = $agent->browser();
 
 ### Desktop detection
 
-Check if the user is a desktop.
+Check if the user is using a desktop device.
 
 ```php
 $agent->isDesktop();
+```
+
+### Phone detection
+
+Check if the user is using a phone device.
+
+```php
+$agent->isPhone();
 ```
 
 *This checks if a user is not a mobile device, tablet or robot.*
@@ -147,7 +155,7 @@ $agent->isRobot();
 
 ### Robot name
 
-Get the robot name. Note: this currently only works for mayor robots like Google, Facebook, Twitter, Bing, Baidu, ...
+Get the robot name. Note: this currently only works for major robots like Google, Facebook, Twitter, Bing, Baidu etc ...
 
 ```php
 $robot = $agent->robot();

@@ -1,0 +1,87 @@
+TODO:
+	LOG EVERYTHING!
+	newsletter signup on home page
+	video/package panels on hero page
+	cache
+	s3 w/referrer
+	nightly CC batch
+	roles/permissions
+		Admin IDs: 1, 4, 2427
+	resend queued emails
+	Cart::remove()
+	Cart::update()
+	add "close" to hero-bar (clears session('hero-slug'))
+	hero-bar if hero->funded, remove donate button
+	hospitals as model
+	hospital/#GameOn map
+	CMiN donations auto credit to closest/longest
+
+
+CMS (in order, add Auth::user()->can(...) checks to nav)
+	Shop
+		Products
+			Attributes
+	Heroes
+	Users
+	Emails
+	Pages
+		page-specific css/js
+	Partials
+	Layouts
+	Team
+	FAQs
+	CSS
+	JS
+	Chat ?
+	Reports:
+		funded heroes w/funded date
+
+my-account
+	orders point to neworder class
+
+emails
+	account
+		title
+	order
+		shipped
+		refunded
+		charged
+		declined
+
+tags
+	tag table (tags)
+		id
+		name
+		created_at
+		updated_at
+	use morph table (taggables)
+	unique on tag_id, taggable_id, taggable_type
+		tag_id
+		taggable_id
+		taggable_type
+
+cron
+	update product sales/amounts
+	orders
+		where payment method is stripe and payment status is null
+		if status != cancelled|refunded
+		create token
+			if charged, update payment status, store token, update hero->raised
+			if declined, update payment status, send email
+
+order
+	on refunded/cancelled:
+		if charged, update hero->raised
+	on charged
+		update hero->raised
+		if cc declined status = on hold
+
+heroes
+	address_id in place of address fields
+	hospital_id in place of hospital fields
+	goal is method
+	raised is method
+
+nomination form
+	add hero email address
+	add hero phone number

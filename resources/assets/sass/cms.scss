@@ -1,0 +1,110 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "_partials/fontawesome/font-awesome";
+@import "_partials/bootstrap/tables";
+
+@for $h from 1 through 100 {
+	.pt-#{$h} {
+		padding-top: #{$h}px;
+	}
+
+	.pl-#{$h} {
+		padding-left: #{$h}px;
+	}
+
+	.pr-#{$h} {
+		padding-right: #{$h}px;
+	}
+
+	.pb-#{$h} {
+		padding-bottom: #{$h}px;
+	}
+
+	.mt-#{$h} {
+		margin-top: #{$h}px;
+	}
+
+	.ml-#{$h} {
+		margin-left: #{$h}px;
+	}
+
+	.mr-#{$h} {
+		margin-right: #{$h}px;
+	}
+
+	.mb-#{$h} {
+		margin-bottom: #{$h}px;
+	}
+
+}
+
+.body-wrapper {
+}
+
+.content-wrapper {
+	margin-top: 50px;
+}
+
+.dashboard-content {
+
+	.panel {
+
+		.panel-heading {
+
+			.panel-heading-number {
+				font-size: 2.857142857em;
+			}
+
+			.panel-heading-text {
+			}
+		}
+
+		&.panel-success {
+
+			a {
+				color: #3c763d;
+			}
+		}
+
+		&.panel-warning {
+
+			a {
+				color: #8a6d3b;
+			}
+		}
+
+		&.panel-danger {
+
+			a {
+				color: #a94442;
+			}
+		}
+	}
+}
+
+.model-form,
+.login-form {
+
+	.input-group {
+		width: 100%;
+	}
+}
+
+.fileinput-button {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+
+	input {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0;
+		opacity: 0;
+		-ms-filter: 'alpha(opacity=0)';
+		font-size: 200px;
+		direction: ltr;
+		cursor: pointer;
+	}
+}
+
+

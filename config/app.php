@@ -145,6 +145,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Other Service Providers...
+         */
+        Collective\Html\HtmlServiceProvider::class,
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        //Former\FormerServiceProvider::class,
+
     ],
 
     /*
@@ -193,6 +201,10 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        //'Former'    => Former\Facades\Former::class,
 
     ],
 

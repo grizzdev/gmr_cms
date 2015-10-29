@@ -1,16 +1,45 @@
 var elixir = require('laravel-elixir');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
- */
-
 elixir(function(mix) {
-    mix.sass('app.scss');
+	//mix.sass('app.scss');
+	mix.sass('cms.scss');
+
+	mix.scripts([
+		'jquery/jquery.js',
+		'jquery/ui.js',
+		'jquery/ujs.js',
+		'jquery/date.js',
+		'jquery/upload.js',
+		'../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+		'bootstrap/validator.js',
+		'bootstrap/tables.js',
+		'bootstrap/extensions/tables-export.js',
+		'bootstrap/extensions/tables-mobile.js',
+		'bootstrap/extensions/tables-reorder.js',
+		//'bootstrap/extensions/tables-toolbar.js',
+		'jspdf.js',
+		'cms.js'
+	], 'public/js/cms.js');
+
+	/*mix.scripts([
+		'jquery-2.1.4.min.js',
+		'jquery-ui.js',
+		'../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+		'lightbox.js',
+		'validator.js',
+		'upload.js',
+		'wow.js',
+		'purl.js',
+		'ujs.js',
+		'video.js',
+		'slick.js',
+		'app.js'
+	], 'public/js/all.js');*/
+
+	mix.version([
+		//'public/css/app.css',
+		//'public/js/all.js',
+		'public/css/cms.css',
+		'public/js/cms.js'
+	]);
 });

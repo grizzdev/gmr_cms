@@ -1,0 +1,34 @@
+{
+    "name": "grizzdev/cms",
+    "description": "CMS for Laravel 5",
+    "keywords": ["cms", "laravel"],
+    "license": "MIT",
+    "homepage": "http://grizzdev.com/projects/cms",
+    "support": {
+    },
+    "authors": [
+        {
+            "name": "Kevin Glick",
+            "email": "kevin@grizzdev.com"
+        }
+    ],
+    "require": {
+    },
+    "replace": {
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "classmap": [
+        ],
+        "files": [
+            "src/GrizzDevCMS/helpers.php"
+        ],
+        "psr-4": {
+            "GrizzDevCMS\\": "src/GrizzDevCMS/"
+        }
+    },
+    "suggest": {
+    },
+    "minimum-stability": "dev"
+}
