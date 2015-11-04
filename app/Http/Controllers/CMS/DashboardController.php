@@ -15,7 +15,7 @@ class DashboardController extends Controller {
 	}
 
 	public function data(Request $request, $model) {
-		$modelName = "\App\Models\\$model";
+		$modelName = "\App\Models\\".ucwords($model);
 		$query = $modelName::skip($request->input('skip'))->take($request->input('take'));
 
 		if ($request->input('sort') && $request->input('order')) {

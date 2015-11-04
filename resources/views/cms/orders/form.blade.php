@@ -71,20 +71,28 @@
 						<tr>
 							<td>{!! $item->product->name !!}</td>
 							<td>
+								@if(!empty($item->hero_id))
 								<b>Hero:</b> {!! $item->hero->name !!}<br />
+								@endif
 								@foreach($item->itemAttributes as $attr)
 									<b>{!! $attr->attribute->name !!}:</b>
 									@if($attr->attribute->name == 'Amount')
 									${!! $attr->value !!}<br />
 									@else
-									{!! $attr->value !!}<br />
+									{!! \App\Models\Attribute::find($attr->value)->name !!}<br />
 									@endif
 								@endforeach
 							</td>
 							<td>{!! $item->quantity !!}</td>
 							<td>
 							@if($item->product->id != 1)
-								{!! Form::select('items['.$item->id.'][status_id]', [9 => 'Not Shipped', 10 => 'Shipped'], $item->status_id, ['class' => 'form-control']) !!}
+								{!! Form::select('items['.$item->id.'][status_id]', [
+									9 => 'Not Shipped',
+									10 => 'Shipped',
+									11 => 'To Print',
+									12 => 'On Order',
+									13 => 'Out for Embroidering/Sewing',
+								], $item->status_id, ['class' => 'form-control']) !!}
 							@endif
 							</td>
 						</tr>

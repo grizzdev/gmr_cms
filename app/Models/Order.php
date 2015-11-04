@@ -6,7 +6,8 @@ use GrizzDev\CMS\Model;
 
 class Order extends Model {
 
-	protected $table = 'orders';
+	#protected $table = 'orders';
+	protected $table = 'neworders';
 
 	protected $fillable = [
 		'user_id',
