@@ -5,8 +5,6 @@ TODO:
 	cache
 	s3 w/referrer
 	nightly CC batch
-	roles/permissions
-		Admin IDs: 1, 4, 2427
 	resend queued emails
 	Cart::remove()
 	Cart::update()
@@ -21,7 +19,7 @@ CMS (in order, add Auth::user()->can(...) checks to nav)
 	Shop
 		Products
 			Attributes
-	Heroes
+	Nominations
 	Users
 	Emails
 	Pages

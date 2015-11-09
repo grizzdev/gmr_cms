@@ -71,7 +71,7 @@ Route::group([
 	});
 
 	Route::get('', 'DashboardController@index');
-	Route::post('order/data', 'Shop\OrderController@data');
+	Route::post('orders/data', 'Shop\OrderController@data');
 	Route::post('{model}/data', 'DashboardController@data');
 	Route::any('upload', 'DashboardController@upload');
 
