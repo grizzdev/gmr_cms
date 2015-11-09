@@ -24,9 +24,9 @@ class DashboardController extends Controller {
 			$query->orderby('created_at', 'desc');
 		}
 
-		/*if ($request->input('search')) {
+		if ($request->input('search')) {
 			$query->where('name', 'LIKE', '%'.$request->input('search').'%');
-		}*/
+		}
 
 		return $query->paginate($request->input('per_page'));
 	}

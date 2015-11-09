@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Hero;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use GrizzDev\CMS\Form;
+use GrizzDev\CMS\Listing;
 
 class HeroController extends Controller {
 
@@ -16,7 +18,7 @@ class HeroController extends Controller {
 	 * @return Response
 	 */
 	public function index() {
-		return \GrizzDev\CMS\Listing::render(new Hero);
+		return Listing::render(new Hero);
 	}
 
 	/**
@@ -25,7 +27,7 @@ class HeroController extends Controller {
 	 * @return Response
 	 */
 	public function create() {
-		return \GrizzDev\CMS\Form::render(new Hero);
+		return Form::render(new Hero);
 	}
 
 	/**
@@ -44,7 +46,7 @@ class HeroController extends Controller {
 	 * @return Response
 	 */
 	public function show($id) {
-		return \GrizzDev\CMS\Form::render(Hero::find($id));
+		return Form::render(Hero::find($id));
 	}
 
 	/**

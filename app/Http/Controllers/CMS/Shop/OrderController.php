@@ -15,7 +15,10 @@ use GrizzDev\CMS\Listing;
 class OrderController extends Controller {
 
 	public function index() {
-		return Listing::render(new Order);
+		return view('cms.orders.list', [
+			'model' => new Order
+		]);
+		//return Listing::render(new Order);
 	}
 
 	public function create() {
