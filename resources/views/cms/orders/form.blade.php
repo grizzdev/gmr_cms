@@ -44,14 +44,14 @@
 					Notes: {!! $order->notes !!}
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					Billing Address: <small><a href="{!! url('shop/addresses/'.$order->shipping_address->id) !!}"><!--[edit]--></a></small>
-					{!! $order->shipping_address->address1 !!}<br />
-					{!! $order->shipping_address->city !!}, {!! $order->shipping_address->state->code !!} {!! $order->shipping_address->zip !!}<br />
-					{!! $order->shipping_address->country->code !!}
+					Billing Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small><br />
+					{!! $order->billing_address->address_1 !!}<br />
+					{!! $order->billing_address->city !!}, {!! $order->billing_address->state->code !!} {!! $order->billing_address->zip !!}<br />
+					{!! $order->billing_address->country->code !!}
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					Shipping Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
-					{!! $order->shipping_address->address1 !!}<br />
+					Shipping Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small><br />
+					{!! $order->shipping_address->address_1 !!}<br />
 					{!! $order->shipping_address->city !!}, {!! $order->shipping_address->state->code !!} {!! $order->shipping_address->zip !!}<br />
 					{!! $order->shipping_address->country->code !!}
 				</div>
