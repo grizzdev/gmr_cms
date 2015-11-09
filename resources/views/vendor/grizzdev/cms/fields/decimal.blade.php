@@ -5,8 +5,8 @@
 			{!! Form::text($field, null, [
 				'class' => 'form-control',
 				'pattern' => '^\d*\.?\d{1,2}?$',
-				$data['required'],
-				$data['disabled']
+				$data['required'] ? 'required' : '',
+				$data['disabled'] ? 'disabled' : ''
 			]) !!}
 			<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 		</div>

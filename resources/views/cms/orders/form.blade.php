@@ -44,14 +44,14 @@
 					Notes: {!! $order->notes !!}
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					Billing Address: <small><a href="{!! url('shop/addresses/'.$order->shipping_address->id) !!}"><!--[edit]--></a></small>
-					{!! $order->shipping_address->address1 !!}<br />
-					{!! $order->shipping_address->city !!}, {!! $order->shipping_address->state->code !!} {!! $order->shipping_address->zip !!}<br />
-					{!! $order->shipping_address->country->code !!}
+					Billing Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
+					{!! $order->billing_address->address_1 !!}<br />
+					{!! $order->billing_address->city !!}, {!! $order->billing_address->state->code !!} {!! $order->billing_address->zip !!}<br />
+					{!! $order->billing_address->country->code !!}
 				</div>
 				<div class="col-xs-12 col-sm-4">
 					Shipping Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
-					{!! $order->shipping_address->address1 !!}<br />
+					{!! $order->shipping_address->address_1 !!}<br />
 					{!! $order->shipping_address->city !!}, {!! $order->shipping_address->state->code !!} {!! $order->shipping_address->zip !!}<br />
 					{!! $order->shipping_address->country->code !!}
 				</div>
@@ -67,11 +67,14 @@
 						</tr>
 					</thead>
 					<tbody>
-					@foreach($order->cart->items as $item)
+					@if($order->cart->items->count())
+						@foreach($order->cart->items as $item)
 						<tr>
 							<td>{!! $item->product->name !!}</td>
 							<td>
+								@if(!empty($item->hero_id))
 								<b>Hero:</b> {!! $item->hero->name !!}<br />
+								@endif
 								@foreach($item->itemAttributes as $attr)
 									<b>{!! $attr->attribute->name !!}:</b>
 									@if($attr->attribute->name == 'Amount')
@@ -88,7 +91,8 @@
 							@endif
 							</td>
 						</tr>
-					@endforeach
+						@endforeach
+					@endif
 					</tbody>
 				</table>
 			</div>

@@ -2,7 +2,7 @@
 	<div class="form-group {!! ($data['required']) ? 'has-feedback' : '' !!}">
 		{!! Form::label($field, $data['label'], ['class' => 'control-label']) !!}
 		<div class="input-group">
-			{!! Form::select($field, [0 => ''] + $data['model']::lists($data['field'], 'id')->toArray(), null, ['class' => 'form-control', $data['required'] ? 'required' : '', $data['disabled'] ? 'disabled' : '']) !!}
+			{!! Form::select($field, \App\Models\Location::where('type', '=', 1)->where('active', '=', 1)->lists('name', 'id'), null, ['class' => 'form-control', $data['required'] ? 'required' : '', $data['disabled'] ? 'disabled' : '']) !!}
 			<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 		</div>
 	</div>
