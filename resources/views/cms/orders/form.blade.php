@@ -67,7 +67,8 @@
 						</tr>
 					</thead>
 					<tbody>
-					@foreach($order->cart->items as $item)
+					@if($order->cart->items->count())
+						@foreach($order->cart->items as $item)
 						<tr>
 							<td>{!! $item->product->name !!}</td>
 							<td>
@@ -96,7 +97,8 @@
 							@endif
 							</td>
 						</tr>
-					@endforeach
+						@endforeach
+					@endif
 					</tbody>
 				</table>
 			</div>
