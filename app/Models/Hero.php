@@ -122,6 +122,20 @@ class Hero extends Model implements SluggableInterface {
 			'required' => true,
 			'disabled' => false
 		],
+		'email_address' => [
+			'label' => 'Email Address',
+			'type' => 'email',
+			'confirmed' => false,
+			'required' => false,
+			'disabled' => false
+		],
+		'phone_number' => [
+			'label' => 'Phone Number',
+			'type' => 'text',
+			'confirmed' => false,
+			'required' => false,
+			'disabled' => false
+		],
 		'address' => [
 			'label' => 'Address',
 			'type' => 'text',
