@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use DB;
 use GrizzDev\CMS\Model;
+use App\Models\Hero;
 
 class Nomination extends Model {
 
@@ -10,6 +12,8 @@ class Nomination extends Model {
 
 	protected $fillable = [
 		'name',
+		'email_address',
+		'phone_number',
 		'overview',
 		'description',
 		'birth_date',
@@ -38,13 +42,6 @@ class Nomination extends Model {
 	];
 
 	protected $listConfig = [
-		'id' => [
-			'label' => '',
-			'sortable' => false,
-			'format' => 'linkFormatter',
-			'mobile' => true,
-			'switchable' => false
-		],
 		'name' => [
 			'label' => 'Name',
 			'sortable' => true,
@@ -68,33 +65,12 @@ class Nomination extends Model {
 			'mobile' => true,
 			'switchable' => true
 		],
-		'goal' => [
-			'label' => '$ Goal',
-			'sortable' => true,
-			'format' => 'currencyFormatter',
-			'mobile' => false,
-			'switchable' => true
-		],
-		'raised' => [
-			'label' => '$ Raised',
-			'sortable' => true,
-			'format' => 'currencyFormatter',
-			'mobile' => false,
-			'switchable' => true
-		],
-		'active' => [
-			'label' => 'Active',
-			'sortable' => true,
-			'format' => 'booleanFormatter',
+		'cancer_type' => [
+			'label' => 'Cancer',
+			'sortable' => false,
+			'format' => null,
 			'mobile' => true,
-			'switchable' => true
-		],
-		'funded' => [
-			'label' => 'Funded',
-			'sortable' => true,
-			'format' => 'booleanFormatter',
-			'mobile' => true,
-			'switchable' => true
+			'switchable' => false
 		],
 		'created_at' => [
 			'label' => 'Created',
@@ -104,13 +80,12 @@ class Nomination extends Model {
 			'mobile' => false,
 			'switchable' => true
 		],
-		'updated_at' => [
-			'label' => 'Updated',
-			'sortable' => true,
-			'type' => 'datetime',
-			'format' => 'datetimeFormatter',
-			'mobile' => false,
-			'switchable' => true
+		'id' => [
+			'label' => '',
+			'sortable' => false,
+			'format' => 'nominationFormatter',
+			'mobile' => true,
+			'switchable' => false
 		]
 	];
 
@@ -121,6 +96,47 @@ class Nomination extends Model {
 	}
 
 	public function nominee() {
+	}
+
+	public function toHero() {
+		if ($this->id) {
+			$hero = Hero::create([
+				'name' => $this->name,
+				'email_address' => $this->email_address,
+				'phone_number' => $this->phone_number,
+				'overview' => $this->overview,
+				'description' => $this->description,
+				'birth_date' => $this->birth_date,
+				'gender' => $this->gender,
+				'address' => $this->address,
+				'city' => $this->city,
+				'state_id' => $this->state_id,
+				'zip' => $this->zip,
+				'shirt_size' => $this->shirt_size,
+				'hospital_name' => $this->hospital_name,
+				'hospital_location' => $this->hospital_location,
+				'cancer_type' => $this->cancer_type,
+				'facebook_url' => $this->facebook_url,
+				'twitter_url' => $this->twitter_url,
+				'youtube_url' => $this->youtube_url,
+				'caringbridge_url' => $this->caringbridge_url,
+				'goal' => 500,
+				'raised' => 0,
+				'active' => 1,
+				'funded' => 0,
+				'file_id' => $this->file_id,
+				'nominee_id' => $this->nominee_id,
+			]);
+
+			DB::table('hero_package')->insert([
+				'hero_id' => $hero->id,
+				'package_id' => 2
+			]);
+
+			$this->delete();
+
+			return $hero;
+		}
 	}
 
 }

@@ -10729,4 +10729,10 @@ div.fixed-table-scroll-outer {
     direction: ltr;
     cursor: pointer; }
 
+a.danger {
+  color: #d9534f; }
+
+a.success {
+  color: #5cb85c; }
+
 /*# sourceMappingURL=cms.css.map */

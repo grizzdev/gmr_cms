@@ -54152,4 +54152,10 @@ function locationTypeFormatter(value) {
 	return type;
 }
 
+function nominationFormatter(value) {
+	return (value)
+		? '<a href="'+value+'/approve" title="Approve" class="success"><i class="glyphicon glyphicon-ok"></i></a>&nbsp;&nbsp;<a href="'+value+'/deny" title="Deny" class="danger"><i class="glyphicon glyphicon-remove"></i></a>'
+		: null;
+}
+
 //# sourceMappingURL=cms.js.map

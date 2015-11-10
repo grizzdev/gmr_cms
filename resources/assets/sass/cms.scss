@@ -34,7 +34,6 @@
 	.mb-#{$h} {
 		margin-bottom: #{$h}px;
 	}
-
 }
 
 .body-wrapper {
@@ -107,4 +106,14 @@
 	}
 }
 
+a {
+
+	&.danger {
+		color: $brand-danger;
+	}
+
+	&.success {
+		color: $brand-success;
+	}
+}
 

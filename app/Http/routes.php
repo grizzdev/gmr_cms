@@ -33,6 +33,9 @@ Route::group([
 		//'middleware' => ['permission:heroes']
 	], function() {
 		Route::resource('heroes', 'HeroController');
+		Route::resource('nominations', 'NominationController');
+		Route::get('nominations/{id}/approve', 'NominationController@approve');
+		Route::get('nominations/{id}/deny', 'NominationController@deny');
 	});
 
 	Route::group([
