@@ -11,7 +11,7 @@ foreach ($model->getListConfig() as $field => $data) {
 
 @section('content')
 <div id="table-toolbar">
-	@if(!in_array($modelName, ['order']))
+	@if(!in_array($modelName, ['order','nomination','hero']))
 	<a href="create" class="btn btn-default" title="New {!! ucwords($modelName) !!}"><i class="fa fa-plus"></i></a>
 	@endif
 </div>
