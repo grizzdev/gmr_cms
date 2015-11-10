@@ -54,10 +54,10 @@
 										<li>
 											<a href="{{ url('heroes') }}">Heroes</a>
 										</li>
-										@endif
-										<!--<li>
+										<li>
 											<a href="{{ url('nominations') }}">Nominations</a>
-										</li>-->
+										</li>
+										@endif
 										<!--<li>
 											<a href="{{ url('packages') }}">Packages</a>
 										</li>-->
