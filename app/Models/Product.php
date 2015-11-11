@@ -34,6 +34,71 @@ class Product extends Model implements SluggableInterface {
 		'save_to' => 'sku',
 	];
 
+	public $listConfig = [
+		'id' => [
+			'label' => '#',
+			'sortable' => false,
+			'format' => 'linkFormatter',
+			'mobile' => true,
+			'switchable' => false
+		],
+		'name' => [
+			'label' => 'Name',
+			'sortable' => true,
+			'format' => null,
+			'mobile' => true,
+			'switchable' => false
+		],
+		'price' => [
+			'label' => 'Price',
+			'sortable' => true,
+			'type' => 'decimal',
+			'format' => 'currencyFormatter',
+			'mobile' => true,
+			'switchable' => false,
+		],
+		'cost' => [
+			'label' => 'Cost',
+			'sortable' => true,
+			'type' => 'decimal',
+			'format' => 'currencyFormatter',
+			'mobile' => false,
+			'switchable' => false,
+		],
+		'contribution_amount' => [
+			'label' => 'Contribution',
+			'sortable' => true,
+			'type' => 'decimal',
+			'format' => 'currencyFormatter',
+			'mobile' => false,
+			'switchable' => false,
+		],
+		'active' => [
+			'label' => 'Active',
+			'sortable' => true,
+			'type' => 'boolean',
+			'format' => 'booleanFormatter',
+			'mobile' => true,
+			'switchable' => false
+		],
+		'created_at' => [
+			'label' => 'Created',
+			'sortable' => true,
+			'type' => 'datetime',
+			'format' => 'datetimeFormatter',
+			'mobile' => false,
+			'switchable' => true
+		],
+		'updated_at' => [
+			'label' => 'Updated',
+			'sortable' => true,
+			'type' => 'datetime',
+			'format' => 'datetimeFormatter',
+			'mobile' => false,
+			'switchable' => true
+		]
+	];
+
 	public function files() {
 		return $this->belongsToMany('App\Models\File')->withTimestamps();
 	}

@@ -79,11 +79,12 @@
 										<li>
 											<a href="{{ url('shop/orders') }}">Orders</a>
 										</li>
+										<li role="separator" class="divider"></li>
 										@endif
 										@if(Auth::user()->can('products'))
-										<!--<li>
+										<li>
 											<a href="{{ url('shop/products') }}">Products</a>
-										</li>-->
+										</li>
 										<li>
 											<a href="{{ url('shop/attributes') }}">Attributes</a>
 										</li>
