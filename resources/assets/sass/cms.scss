@@ -1,6 +1,7 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "_partials/fontawesome/font-awesome";
 @import "_partials/bootstrap/tables";
+@import "_partials/bootstrap/tagsinput";
 
 @for $h from 1 through 100 {
 	.pt-#{$h} {
@@ -83,9 +84,11 @@
 .model-form,
 .login-form {
 
-	.input-group {
-		width: 100%;
+	.input-group,
+	.input[data-role="tagsinput"] {
+		width: 100% !important;
 	}
+
 }
 
 .fileinput-button {

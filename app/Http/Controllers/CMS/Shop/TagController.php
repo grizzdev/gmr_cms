@@ -64,4 +64,5 @@ class TagController extends Controller {
 			return redirect()->back();
 		}
 	}
+
 }

@@ -57,10 +57,13 @@ Route::group([
 		], function() {
 			Route::post('products/create', 'ProductController@store');
 			Route::resource('products', 'ProductController');
+
 			Route::post('attributes/create', 'AttributeController@store');
 			Route::resource('attributes', 'AttributeController');
+
 			Route::post('categories/create', 'CategoryController@store');
 			Route::resource('categories', 'CategoryController');
+
 			Route::post('tags/create', 'TagController@store');
 			Route::resource('tags', 'TagController');
 		});
@@ -76,6 +79,7 @@ Route::group([
 	Route::get('', 'DashboardController@index');
 	Route::post('orders/data', 'Shop\OrderController@data');
 	Route::post('{model}/data', 'DashboardController@data');
+	Route::get('{model}/json', 'DashboardController@json');
 	Route::any('upload', 'DashboardController@upload');
 
 });

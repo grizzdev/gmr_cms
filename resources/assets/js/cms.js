@@ -34,6 +34,25 @@ $('input[type="file"]').fileupload({
 	}
 });
 
+var tagnames = new Bloodhound({
+	datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+	queryTokenizer: Bloodhound.tokenizers.whitespace,
+	remote: {
+		url: '/tag/json'
+	}
+});
+
+tagnames.initialize();
+
+$('input[data-role="tagsinput"]').tagsinput({
+	typeaheadjs: {
+		name: 'tags',
+		displayKey: 'name',
+		valueKey: 'name',
+		source: tagnames
+	}
+});
+
 function showModal(id, content, title, buttons) {
 	content = ((typeof content !== 'undefined') ? content : null);
 	title = ((typeof title !== 'undefined') ? title : null);
