@@ -8,6 +8,7 @@ use DB;
 use Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use App\Models\Product;
 use GrizzDev\CMS\Form;
 use GrizzDev\CMS\Listing;
@@ -52,6 +53,11 @@ class ProductController extends Controller {
 
 		DB::table('attribute_product')->where('product_id', '=', $product->id)->delete();
 
+		DB::table('attribute_product')->insert([
+			'product_id' => $product->id,
+			'attribute_id' => 39
+		]);
+
 		if (is_array($request->input('attribute'))) {
 			foreach ($request->input('attribute') as $id => $attrs) {
 				DB::table('attribute_product')->insert([
@@ -65,6 +71,20 @@ class ProductController extends Controller {
 						'product_id' => $product->id
 					]);
 				}
+			}
+		}
+
+		DB::table('product_tag')->where('product_id', '=', $product->id)->delete();
+
+		if ($request->input('tags')) {
+			$tags = preg_split('/,/', $request->input('tags'));
+			foreach ($tags as $tag) {
+				$t = Tag::firstOrCreate(['name' => $tag]);
+
+				DB::table('product_tag')->insert([
+					'product_id' => $product->id,
+					'tag_id' => $t->id
+				]);
 			}
 		}
 	}

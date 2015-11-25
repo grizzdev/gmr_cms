@@ -1,3 +1,9 @@
+<?
+$tags = [];
+foreach ($product->tags as $tag) {
+	$tags[] = $tag->name;
+}
+?>
 @extends('vendor.grizzdev.cms.layouts.cms')
 
 @section('content')
@@ -91,9 +97,14 @@
 					{!! Form::label('active', 'Active', ['class' => 'control-label']) !!}
 					{!! Form::select('active', [0 => 'No', 1 => 'Yes'], null, ['class' => 'form-control']) !!}
 				</div>
+				<div class="col-xs-12 col-sm-6">
+					{!! Form::label('tags', 'Tags', ['class' => 'control-label']) !!}
+					<br />
+					{!! Form::text('tags', implode(',', $tags), ['class' => 'form-control', 'data-role' => 'tagsinput']) !!}
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-xs-12 col-sm-6">
 					<hr />
 					<h5>Attributes</h5>
 					@foreach($product->attributes as $attribute)
@@ -108,6 +119,8 @@
 						{!! Form::select('attribute['.$attribute->id.'][]', \App\Models\Attribute::where('parent_id', '=', $attribute->id)->lists('name', 'id'), $attrs, ['class' => 'form-control', 'multiple']) !!}
 						@endif
 					@endforeach
+				</div>
+				<div class="col-xs-12 col-sm-6">
 				</div>
 			</div>
 		</div>

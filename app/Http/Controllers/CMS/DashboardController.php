@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS;
 
 use Illuminate\Http\Request;
 
+use Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\File;
@@ -56,6 +57,18 @@ class DashboardController extends Controller {
 		}
 
 		return json_encode(['image' => $result]);
+	}
+
+	public function json(Request $request, $model) {
+		$modelName = "\App\Models\\".ucwords($model);
+
+		$models = [];
+
+		foreach ($modelName::all() as $m) {
+			$models[] = $m;
+		}
+
+		return Response::json($models);
 	}
 
 }
