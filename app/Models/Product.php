@@ -22,7 +22,8 @@ class Product extends Model implements SluggableInterface {
 		'sale_price',
 		'contribution_amount',
 		'total_sales_count',
-		'total_sales_amount'
+		'total_sales_amount',
+		'active'
 	];
 
 	protected $dates = [

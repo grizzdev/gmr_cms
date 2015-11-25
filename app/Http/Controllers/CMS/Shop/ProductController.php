@@ -46,7 +46,7 @@ class ProductController extends Controller {
 			'contribution_amount' => $request->input('contribution_amount'),
 			'description' => $request->input('description'),
 			'short_description' => $request->input('short_description'),
-			'active' => $request->input('active'),
+			'active' => $request->input('active')
 		]);
 
 		$product->save();
