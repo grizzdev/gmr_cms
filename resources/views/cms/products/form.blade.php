@@ -3,6 +3,10 @@ $tags = [];
 foreach ($product->tags as $tag) {
 	$tags[] = $tag->name;
 }
+$categories = [];
+foreach ($product->categories as $cat) {
+	$categories[] = $cat->id;
+}
 ?>
 @extends('vendor.grizzdev.cms.layouts.cms')
 
@@ -103,10 +107,9 @@ foreach ($product->tags as $tag) {
 					{!! Form::text('tags', implode(',', $tags), ['class' => 'form-control', 'data-role' => 'tagsinput']) !!}
 				</div>
 			</div>
+			<hr />
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
-					<hr />
-					<h5>Attributes</h5>
 					@foreach($product->attributes as $attribute)
 						<?php $attrs = [] ?>
 						@if(!$attribute->parent_id && $attribute->id != 39 && $attribute->type == 'select')
@@ -121,6 +124,8 @@ foreach ($product->tags as $tag) {
 					@endforeach
 				</div>
 				<div class="col-xs-12 col-sm-6">
+					{!! Form::label('categories', 'Categories', ['class' => 'control-label']) !!}
+					{!! Form::select('categories[]', \App\Models\Category::lists('name', 'id'), $categories, ['class' => 'form-control', 'multiple']) !!}
 				</div>
 			</div>
 		</div>

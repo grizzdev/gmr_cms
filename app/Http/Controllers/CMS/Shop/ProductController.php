@@ -87,6 +87,17 @@ class ProductController extends Controller {
 				]);
 			}
 		}
+
+		DB::table('category_product')->where('product_id', '=', $product->id)->delete();
+
+		if (is_array($request->input('categories'))) {
+			foreach ($request->input('categories') as $cat_id) {
+				DB::table('category_product')->insert([
+					'category_id' => $cat_id,
+					'product_id' => $product->id
+				]);
+			}
+		}
 	}
 
 	public function destroy(Request $request, $id) {
