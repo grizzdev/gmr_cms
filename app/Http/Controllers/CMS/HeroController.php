@@ -74,27 +74,27 @@ class HeroController extends Controller {
 		}
 
 		$hero->update([
-			'active' => $request->input('active'),
-			'address' => $request->input('address'),
-			'birth_date' => $request->input('birth_date'),
-			'cancer_type' => $request->input('cancer_type'),
-			'caringbridge_url' => $request->input('caringbridge_url'),
-			'city' => $request->input('city'),
-			'description' => $request->input('description'),
-			'facebook_url' => $request->input('facebook_url'),
-			'funded' => $request->input('funded'),
-			'gender' => $request->input('gender'),
-			'goal' => $request->input('goal'),
-			'hospital_location' => $request->input('hospital_location'),
-			'hospital_name' => $request->input('hospital_name'),
 			'name' => $request->input('name'),
-			'overview' => $request->input('overview'),
+			'active' => $request->input('active'),
+			'funded' => $request->input('funded'),
+			'goal' => $request->input('goal'),
 			'raised' => $request->input('raised'),
+			'birth_date' => $request->input('birth_date'),
+			'gender' => $request->input('gender'),
+			'email_address' => $request->input('email_address'),
+			'phone_number' => $request->input('phone_number'),
+			'address' => $request->input('address'),
+			'city' => $request->input('city'),
+			'state_id' => $request->input('state_id'),
+			'zip' => $request->input('zip'),
 			'shirt_size' => $request->input('shirt_size'),
+			'cancer_type' => $request->input('cancer_type'),
+			'facebook_url' => $request->input('facebook_url'),
 			'twitter_url' => $request->input('twitter_url'),
 			'youtube_url' => $request->input('youtube_url'),
-			'zip' => $request->input('zip'),
-			'state_id' => $request->input('state_id')
+			'caringbridge_url' => $request->input('caringbridge_url'),
+			'overview' => $request->input('overview'),
+			'description' => $request->input('description')
 		]);
 
 		$hero->save();

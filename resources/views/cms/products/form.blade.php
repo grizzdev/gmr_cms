@@ -64,7 +64,7 @@ foreach ($product->categories as $cat) {
 						{!! Form::label('cost', 'Cost', ['class' => 'control-label']) !!}
 						<div class="input-group">
 							<div class="input-group-addon">$</div>
-							{!! Form::text('cost', null, ['class' => 'form-control', 'pattern' => '^\d*\.?\d{1,2}?$', 'required']) !!}
+							{!! Form::text('cost', null, ['class' => 'form-control', 'pattern' => '^\d*\.?\d{1,2}?$']) !!}
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 					</div>
