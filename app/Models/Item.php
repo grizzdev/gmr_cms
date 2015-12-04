@@ -49,7 +49,7 @@ class Item extends Model {
 			} elseif ($attribute->attribute->price) {
 				$price += $attribute->attribute->price;
 			} elseif ($attribute->attribute->type == 'select') {
-				$attr = \App\Attribute::find($attribute->value);
+				$attr = \App\Models\Attribute::find($attribute->value);
 				if ($attr->price) {
 					$price += $attr->price;
 				}

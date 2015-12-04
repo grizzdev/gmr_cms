@@ -14,13 +14,13 @@ class Order extends Model {
 		'cart_id',
 		'payment_method_id',
 		'payment_token',
+		'payment_id',
 		'payment_status_id',
 		'status_id',
-		'card_id',
 		'billing_address_id',
 		'shipping_address_id',
-		'notes',
-		'meta'
+		'meta',
+		'notes'
 	];
 
 	protected $formConfig = [
@@ -71,6 +71,10 @@ class Order extends Model {
 		]
 	];
 
+	public function getTotalAttribute($value) {
+		return $this->cart->total();
+	}
+
 	public function user() {
 		return $this->belongsTo('App\Models\User');
 	}
@@ -93,6 +97,10 @@ class Order extends Model {
 
 	public function shipping_address() {
 		return $this->belongsTo('App\Models\Address', 'shipping_address_id');
+	}
+
+	public function payment() {
+		return $this->belongsTo('App\Models\PaymentMethod', 'payment_method_id');
 	}
 
 }
