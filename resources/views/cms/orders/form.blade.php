@@ -15,14 +15,14 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-xs-12 col-sm-3">
-					{!! Form::label('created_at', 'Created') !!}
+					{!! Form::label('created_at', 'Created') !!}: {!! date('m/d/Y g:i a', strtotime($order->created_at)) !!}
 					<br />
-					{!! date('m/d/Y g:i a', strtotime($order->created_at)) !!}
+					{!! Form::label('updated_at', 'Updated') !!}: {!! date('m/d/Y g:i a', strtotime($order->updated_at)) !!}
 				</div>
 				<div class="col-xs-12 col-sm-3">
-					{!! Form::label('updated_at', 'Updated') !!}
+					{!! Form::label('order_total', 'Total') !!}: ${!! number_format($order->total, 2, '.', '') !!}
 					<br />
-					{!! date('m/d/Y g:i a', strtotime($order->updated_at)) !!}
+					{!! Form::label('payment_type','Payment') !!}: {!! $order->payment->name !!}
 				</div>
 				<div class="col-xs-12 col-sm-3">
 					{!! Form::label('status_id', 'Status') !!}
@@ -38,24 +38,26 @@
 			<br />
 			<div class="row">
 				<div class="col-xs-12 col-sm-4">
-					Name: {!! $order->user->name !!} <br />
-					Email: {!! $order->user->email !!} <br />
-					Phone: {!! $order->user->phone !!}<br />
-					Notes: {!! $order->notes !!}
+					{!! Form::label('name', 'Name') !!}: {!! $order->user->name !!} <br />
+					{!! Form::label('email', 'Email') !!}: {!! $order->user->email !!} <br />
+					{!! Form::label('phone', 'Phone') !!}: {!! $order->user->phone !!}<br />
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					Billing Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
+					{!! Form::label('billing_address', 'Billing Address') !!}: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
+					<br />
 					{!! $order->billing_address->address_1 !!}<br />
 					{!! $order->billing_address->city !!}, {!! $order->billing_address->state->code !!} {!! $order->billing_address->zip !!}<br />
 					{!! $order->billing_address->country->code !!}
 				</div>
 				<div class="col-xs-12 col-sm-4">
-					Shipping Address: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
+					{!! Form::label('shipping_address', 'Shipping Address') !!}: <small><a href="{!! url('shop/addresses/'.$order->billing_address->id) !!}"><!--[edit]--></a></small>
+					<br />
 					{!! $order->shipping_address->address_1 !!}<br />
 					{!! $order->shipping_address->city !!}, {!! $order->shipping_address->state->code !!} {!! $order->shipping_address->zip !!}<br />
 					{!! $order->shipping_address->country->code !!}
 				</div>
 			</div>
+			<br />
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
@@ -95,6 +97,12 @@
 					@endif
 					</tbody>
 				</table>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					{!! Form::label('notes', 'Notes', ['class' => 'control-label']) !!}
+					{!! Form::textarea('notes', $order->notes, ['class' => 'form-control']) !!}
+				</div>
 			</div>
 		</div>
 		<div class="panel-footer">

@@ -35,4 +35,12 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'paypal' => [
+        'user'          => env('PAYPAL_USER'),
+        'pwd'           => env('PAYPAL_PWD'),
+        'signature'     => env('PAYPAL_SIGNATURE'),
+        'url'           => env('PAYPAL_URL'),
+        'redirect_url'  => env('PAYPAL_REDIRECT_URL'),
+    ]
+
 ];

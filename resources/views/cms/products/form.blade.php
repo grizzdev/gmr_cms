@@ -84,14 +84,15 @@ foreach ($product->categories as $cat) {
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group has-feedback">
 						{!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
-						{!! Form::textarea('description', null, ['class' => 'form-control', 'required']) !!}
+						{!! Form::textarea('description', null, ['class' => 'form-control editor', 'required']) !!}
 						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<div class="form-group has-feedback">
 						{!! Form::label('short_description', 'Short Description', ['class' => 'control-label']) !!}
-						{!! Form::textarea('short_description', null, ['class' => 'form-control', 'required']) !!}
+						@include('cms.includes.editor_toolbar', ['target' => 'short_description'])
+						<div class="editor" id="short_description" contenteditable="true">{!! $product->short_description !!}</div>
 						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					</div>
 				</div>

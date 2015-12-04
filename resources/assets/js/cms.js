@@ -53,6 +53,8 @@ $('input[data-role="tagsinput"]').tagsinput({
 	}
 });
 
+$('div.editor').wysiwyg();
+
 function showModal(id, content, title, buttons) {
 	content = ((typeof content !== 'undefined') ? content : null);
 	title = ((typeof title !== 'undefined') ? title : null);
