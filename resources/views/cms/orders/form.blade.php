@@ -16,13 +16,9 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-3">
 					{!! Form::label('created_at', 'Created') !!}: {!! date('m/d/Y g:i a', strtotime($order->created_at)) !!}
-					<br />
-					{!! Form::label('updated_at', 'Updated') !!}: {!! date('m/d/Y g:i a', strtotime($order->updated_at)) !!}
 				</div>
 				<div class="col-xs-12 col-sm-3">
-					{!! Form::label('order_total', 'Total') !!}: ${!! number_format($order->total, 2, '.', '') !!}
-					<br />
-					{!! Form::label('payment_type','Payment') !!}: {!! $order->payment->name !!}
+					{!! Form::label('updated_at', 'Updated') !!}: {!! date('m/d/Y g:i a', strtotime($order->updated_at)) !!}
 				</div>
 				<div class="col-xs-12 col-sm-3">
 					{!! Form::label('status_id', 'Status') !!}
@@ -30,7 +26,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-3">
 					<div class="form-group">
-						{!! Form::label('payment_status_id', 'Payment Status') !!}
+						{!! Form::label('payment_status_id', 'Payment') !!}: {!! $order->payment->name !!}
 						{!! Form::select('order[payment_status_id]', [1 => 'Pending', 6 => 'Refunded', 7 => 'Charged', 8 => 'Declined'], $order->payment_status_id, ['class' => 'form-control']) !!}
 					</div>
 				</div>
@@ -102,6 +98,12 @@
 						@endforeach
 					@endif
 					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3" align="right"><b>Total</b></td>
+							<td align="right"><b>${!! number_format($order->total, 2, '.', '') !!}</b></td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 			<div class="row">
