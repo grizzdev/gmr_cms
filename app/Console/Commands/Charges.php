@@ -31,15 +31,31 @@ class Charges extends Command {
 	 */
 	public function handle() {
 		echo "\n".date('Y-m-d h:i:s')." Processing Charges\n";
+
 		$order = Order::whereNotIn('status_id', [3,4,5])->where('payment_status_id', '=', 1)->first();
+
+		if (!$order) {
+			echo "\tNo Pending Orders\n";
+			exit();
+		}
+
 		echo "\tOrder: {$order->id}\n";
 		echo "\tTotal: $".$order->cart->total()."\n";
+
+		$has_donation = false;
+		$only_donation = true;
+
+		foreach ($order->cart->items as $item) {
+			if ($item->product->id == 1) {
+				$has_donation = true;
+			} else {
+				$only_donation = false;
+			}
+		}
 
 		if ($order->payment_method_id == 1) { // Stripe
 			echo "\tProcessing via Stripe\n";
 			Stripe::setApiKey(config('services.stripe.secret'));
-			$has_donation = false;
-			$only_donation = true;
 
 			$charge_data = [
 					'source' => $order->payment_token,
@@ -47,14 +63,6 @@ class Charges extends Command {
 					'currency' => 'usd',
 					'description' => 'Gamerosity Order #'.$order->id
 			];
-
-			foreach ($order->cart->items as $item) {
-					if ($item->product->id == 1) {
-							$has_donation = true;
-					} else {
-							$only_donation = false;
-					}
-			}
 
 			try {
 					$charge = Charge::create($charge_data);
@@ -65,8 +73,6 @@ class Charges extends Command {
 
 					if ($has_donation && $only_donation) {
 						$order->status_id = 3;
-					} elseif ($order->status_id == 1) {
-						$order->status_id = 2;
 					}
 
 					$order->save();
@@ -104,25 +110,31 @@ class Charges extends Command {
 		} elseif ($order->payment_method_id == 2) { // PayPal
 			echo "\tProcessing via PayPal\n";
 
-			$response = (new Client())->get(config('services.paypal.url'), [
+			$response = (new Client())->get(env('PAYPAL_URL'), [
 				'verify' => false,
 				'query' => [
-					'USER' => config('services.paypal.user'),
-					'PWD' => config('services.paypal.pwd'),
-					'SIGNATURE' => config('services.paypal.signature'),
+					'USER' => env('PAYPAL_USER'),
+					'PWD' => env('PAYPAL_PWD'),
+					'SIGNATURE' => env('PAYPAL_SIGNATURE'),
 					'METHOD' => 'DoExpressCheckoutPayment',
 					'VERSION' => 93,
 					'TOKEN' => $order->payment_token,
 					'PAYERID' => $order->payer_id,
 					'PAYMENTREQUEST_0_PAYMENTACTION' => 'SALE',
-					'PAYMENTREQUEST_0_AMT' => $order->total(),
+					'PAYMENTREQUEST_0_AMT' => $order->cart->total(),
 					'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
 				]
 			]);
 
-			print_r($response);
-			print_r($response->getStatusCode());
-			print_r($response->getBody());
+			//print_r($response);
+
+			$order->payment_status_id = 7;
+
+			if ($has_donation && $only_donation) {
+				$order->status_id = 3;
+			}
+
+			$order->save();
 		}
 	}
 }

@@ -145,12 +145,14 @@ datagrid supports also csv output, so it can be used as "report" tool.
    $form->add('title','Title', 'text'); //field name, label, type
    $form->add('body','Body', 'textarea')->rule('required'); //validation
 
-   //some enhanced field (images, wysiwyg, autocomplete, etc..):
+   //some enhanced field (images, wysiwyg, autocomplete, maps, etc..):
    $form->add('photo','Photo', 'image')->move('uploads/images/')->preview(80,80);
    $form->add('body','Body', 'redactor'); //wysiwyg editor
    $form->add('author.name','Author','autocomplete')->search(['firstname','lastname']);
    $form->add('categories.name','Categories','tags'); //tags field
- 
+   $form->add('map','Position','map')->latlon('latitude','longitude'); //google map
+
+
    //you can also use now the smart syntax for all fields: 
    $form->text('title','Title'); //field name, label
    $form->textarea('body','Body')->rule('required'); //validation
@@ -262,8 +264,11 @@ It also support query scopes (see eloquent documentation), closures, and a cool 
 ```php
    $filter = \DataFilter::source(new Article);
 
-   //simple where 
+   //simple like 
    $filter->add('title','Title', 'text');
+          
+   //simple where with exact match
+   $filter->add('id', 'ID', 'text')->clause('where')->operator('=');
           
    //custom query scope, you can define the query logic in your model
    $filter->add('search','Search text', 'text')->scope('myscope');

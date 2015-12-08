@@ -116,3 +116,25 @@ function nominationFormatter(value) {
 		? '<a href="'+value+'/approve" title="Approve" class="success"><i class="glyphicon glyphicon-ok"></i></a>&nbsp;&nbsp;<a href="'+value+'/deny" title="Deny" class="danger"><i class="glyphicon glyphicon-remove"></i></a>'
 		: null;
 }
+
+var $table = $('#table'), $btn = $('#btn-filter');
+
+$(function () {
+	$btn.click(function () {
+		$table.bootstrapTable('refresh');
+	});
+});
+
+function queryParams() {
+ 	var params = {};
+
+	$('#table-toolbar').find('input[name], select[name]').each(function () {
+		params[$(this).attr('name')] = $(this).val();
+	});
+
+	return params;
+}
+
+function responseHandler(res) {
+	return res.rows;
+}
