@@ -2,12 +2,13 @@
 
 namespace GrizzDev\CMS;
 
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Former\Facades\Former;
 
 class Model extends \Illuminate\Database\Eloquent\Model {
 
-	use SoftDeletes;
+	use SoftDeletes, SearchableTrait;
 
 	protected $formConfig = [];
 
