@@ -3520,7 +3520,4 @@ return array(
     'phpDocumentor\\Reflection\\DocBlock\\Tag\\VarTag' => $vendorDir . '/phpdocumentor/reflection-docblock/src/phpDocumentor/Reflection/DocBlock/Tag/VarTag.php',
     'phpDocumentor\\Reflection\\DocBlock\\Tag\\VersionTag' => $vendorDir . '/phpdocumentor/reflection-docblock/src/phpDocumentor/Reflection/DocBlock/Tag/VersionTag.php',
     'phpDocumentor\\Reflection\\DocBlock\\Type\\Collection' => $vendorDir . '/phpdocumentor/reflection-docblock/src/phpDocumentor/Reflection/DocBlock/Type/Collection.php',
-	'GrizzDev\\CMS\\Model' => $vendorDir . '/grizzdev/cms/src/classes/Model.php',
-	'GrizzDev\\CMS\\Form' => $vendorDir . '/grizzdev/cms/src/classes/Form.php',
-	'GrizzDev\\CMS\\Listing' => $vendorDir . '/grizzdev/cms/src/classes/Listing.php',
 );
