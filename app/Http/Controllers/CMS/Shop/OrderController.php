@@ -43,6 +43,7 @@ class OrderController extends Controller {
 
 		$order->status_id = $request->input('order')['status_id'];
 		$order->payment_status_id = $request->input('order')['payment_status_id'];
+		$order->notes = $request->input('notes');
 		$order->save();
 
 		if (!empty($request->input('items'))) {
@@ -65,10 +66,10 @@ class OrderController extends Controller {
 
 	public function data(Request $request) {
 		$orders = Order::skip($request->input('skip'))->take($request->input('take'))
-			->join('statuses AS status', 'orders.status_id', '=', 'status.id')
-			->join('users AS user', 'orders.user_id', '=', 'user.id')
-			->join('statuses AS payment_status', 'orders.payment_status_id', '=', 'payment_status.id')
-			->select('orders.*', 'status.name AS status', 'user.name AS user', 'payment_status.name AS payment_status');
+			->join('statuses AS status', 'neworders.status_id', '=', 'status.id')
+			->join('users AS user', 'neworders.user_id', '=', 'user.id')
+			->join('statuses AS payment_status', 'neworders.payment_status_id', '=', 'payment_status.id')
+			->select('neworders.*', 'status.name AS status', 'user.name AS user', 'payment_status.name AS payment_status');
 
 		if ($request->input('status_id') != 0) {
 			$orders->where('status_id', '=', $request->input('status_id'));
