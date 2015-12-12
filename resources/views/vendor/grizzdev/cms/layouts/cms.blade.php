@@ -89,6 +89,9 @@
 											<a href="{{ url('shop/attributes') }}">Attributes</a>
 										</li>
 										<li>
+											<a href="{{ url('shop/coupons') }}">Coupons</a>
+										</li>
+										<li>
 											<a href="{{ url('shop/categories') }}">Categories</a>
 										</li>
 										<li>

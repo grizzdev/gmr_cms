@@ -117,6 +117,16 @@ function nominationFormatter(value) {
 		: null;
 }
 
+function amountFormatter(value) {
+	if (value == 0) {
+		return '';
+	} else if (value < 1) {
+		return (value * 100) + '%';
+	} else {
+		return '$' + value;
+	}
+}
+
 var $table = $('#table'), $btn = $('#btn-filter');
 
 $(function () {
