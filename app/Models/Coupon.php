@@ -111,7 +111,7 @@ class Coupon extends Model {
 			'disabled' => false
 		],
 		'minimum_amount' => [
-			'label' => 'Minimum Purchase Amount',
+			'label' => 'Min. Purchase Amount',
 			'type' => 'dollar',
 			'confirmed' => false,
 			'required' => false,
