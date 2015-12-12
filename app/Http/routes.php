@@ -66,6 +66,9 @@ Route::group([
 
 			Route::post('tags/create', 'TagController@store');
 			Route::resource('tags', 'TagController');
+
+			Route::post('coupons/create', 'CouponController@store');
+			Route::resource('coupons', 'CouponController');
 		});
 
 		Route::group([

@@ -4,22 +4,17 @@ TODO:
 	video/package panels on hero page
 	cache
 	s3 w/referrer
-	nightly CC batch
 	resend queued emails
 	Cart::remove()
 	Cart::update()
 	add "close" to hero-bar (clears session('hero-slug'))
-	hero-bar if hero->funded, remove donate button
 	hospitals as model
 	hospital/#GameOn map
-	CMiN donations auto credit to closest/longest
-
 
 CMS (in order, add Auth::user()->can(...) checks to nav)
 	Shop
 		Products
 			Attributes
-	Nominations
 	Users
 	Emails
 	Pages
@@ -61,25 +56,15 @@ tags
 cron
 	update product sales/amounts
 	orders
-		where payment method is stripe and payment status is null
-		if status != cancelled|refunded
-		create token
-			if charged, update payment status, store token, update hero->raised
-			if declined, update payment status, send email
+		if charged, send email
+		if declined, send email
 
 order
 	on refunded/cancelled:
 		if charged, update hero->raised
-	on charged
-		update hero->raised
-		if cc declined status = on hold
 
 heroes
 	address_id in place of address fields
 	hospital_id in place of hospital fields
 	goal is method
 	raised is method
-
-nomination form
-	add hero email address
-	add hero phone number

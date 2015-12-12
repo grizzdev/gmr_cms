@@ -1,8 +1,15 @@
+<?
+if ($model->$field) {
+	$value = date('Y-m-d', strtotime($model->$field));
+} else {
+	$value = null;
+}
+?>
 <div class="col-xs-12 col-sm-6">
 	<div class="form-group {!! ($data['required']) ? 'has-feedback' : '' !!}">
 		{!! Form::label($field, $data['label'], ['class' => 'control-label']) !!}
 		<div class="input-group">
-			{!! Form::$data['type']($field, null, ['class' => 'form-control', $data['required'] ? 'required' : '', $data['disabled'] ? 'disabled' : '']) !!}
+			{!! Form::$data['type']($field, $value, ['class' => 'form-control', $data['required'] ? 'required' : '', $data['disabled'] ? 'disabled' : '']) !!}
 			<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 		</div>
 	</div>
