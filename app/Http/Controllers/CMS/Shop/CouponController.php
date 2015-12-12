@@ -25,11 +25,20 @@ class CouponController extends Controller {
 		$coupon = Coupon::create([
 			'code' => $request->input('code'),
 			'type' => $request->input('type'),
-			'amount' => $request->input('amount'),
 			'uses' => $request->input('uses'),
 			'minimum_amount' => ($request->input('minimum_amount')) ? $request->input('minimum_amount') : null,
 			'expires_at' => ($request->input('expires_at')) ? $request->input('expires_at') : null,
 		]);
+
+		if ($coupon->type == 'percentage') {
+			if ($request->input('amount') >= 1) {
+				$coupon->amount = ($request->input('amount') / 100);
+			} else {
+				$coupon->amount = $request->input('amount');
+			}
+		} else {
+			$coupon->amount = $request->input('amount');
+		}
 
 		if ($request->input('products_json')) {
 			$coupon->products_json = json_encode($request->input('products_json'));
@@ -61,11 +70,20 @@ class CouponController extends Controller {
 		$coupon->update([
 			'code' => $request->input('code'),
 			'type' => $request->input('type'),
-			'amount' => $request->input('amount'),
 			'uses' => $request->input('uses'),
 			'minimum_amount' => ($request->input('minimum_amount')) ? $request->input('minimum_amount') : null,
 			'expires_at' => ($request->input('expires_at')) ? $request->input('expires_at') : null,
 		]);
+
+		if ($coupon->type == 'percentage') {
+			if ($request->input('amount') >= 1) {
+				$coupon->amount = ($request->input('amount') / 100);
+			} else {
+				$coupon->amount = $request->input('amount');
+			}
+		} else {
+			$coupon->amount = $request->input('amount');
+		}
 
 		if ($request->input('products_json')) {
 			$coupon->products_json = json_encode($request->input('products_json'));
