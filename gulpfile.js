@@ -19,7 +19,8 @@ elixir(function(mix) {
 		'bootstrap/extensions/tables-mobile.js',
 		'bootstrap/extensions/tables-reorder.js',
 		//'bootstrap/extensions/tables-toolbar.js',
-		'bootstrap/wysiwyg.js',
+		'trumbowyg/trumbowyg.js',
+		'trumbowyg/plugins/trumbowyg.upload.js',
 		'jspdf.js',
 		'cms.js'
 	], 'public/js/cms.js');

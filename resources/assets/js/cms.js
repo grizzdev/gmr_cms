@@ -53,7 +53,26 @@ $('input[data-role="tagsinput"]').tagsinput({
 	}
 });
 
-$('div.editor').wysiwyg();
+$('textarea.editor').trumbowyg({
+	btns: [
+		'viewHTML',
+		'|',
+		'formatting',
+		'|',
+		'btnGrp-design',
+		'|',
+		'link',
+		'|',
+		'insertImage',
+		//'|',
+		//'upload',
+		'|',
+		'btnGrp-justify',
+		'|',
+		'btnGrp-lists'
+	],
+	fullscreenable: false
+});
 
 function showModal(id, content, title, buttons) {
 	content = ((typeof content !== 'undefined') ? content : null);
