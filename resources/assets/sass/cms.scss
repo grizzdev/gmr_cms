@@ -2,6 +2,7 @@
 @import "_partials/fontawesome/font-awesome";
 @import "_partials/bootstrap/tables";
 @import "_partials/bootstrap/tagsinput";
+@import "_partials/trumbowyg/trumbowyg";
 
 @for $h from 1 through 100 {
 	.pt-#{$h} {
