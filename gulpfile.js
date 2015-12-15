@@ -20,6 +20,7 @@ elixir(function(mix) {
 		'bootstrap/extensions/tables-reorder.js',
 		//'bootstrap/extensions/tables-toolbar.js',
 		'trumbowyg/trumbowyg.js',
+		'trumbowyg/plugins/trumbowyg.upload.js',
 		'jspdf.js',
 		'cms.js'
 	], 'public/js/cms.js');

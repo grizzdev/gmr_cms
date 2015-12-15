@@ -64,11 +64,14 @@ $('textarea.editor').trumbowyg({
 		'link',
 		'|',
 		'insertImage',
+		//'|',
+		//'upload',
 		'|',
 		'btnGrp-justify',
 		'|',
 		'btnGrp-lists'
-	]
+	],
+	fullscreenable: false
 });
 
 function showModal(id, content, title, buttons) {
