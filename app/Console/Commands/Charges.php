@@ -42,6 +42,14 @@ class Charges extends Command {
 		echo "\tOrder: {$order->id}\n";
 		echo "\tTotal: $".$order->cart->total()."\n";
 
+		if ($order->payment_method_id == 1 && !preg_match('/tok_/', $order->payment_token)) {
+			$order->payment_method_id = 2;
+			$order->status_id = 4;
+			$order->payment_status_id = 8;
+			$order->save();
+			exit();
+		}
+
 		$has_donation = false;
 		$only_donation = true;
 

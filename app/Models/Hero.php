@@ -35,6 +35,8 @@ class Hero extends Model implements SluggableInterface {
 		'funded',
 		'address_id',
 		'hospital_id',
+		'hospital_name',
+		'hospital_location',
 		'file_id',
 		'nominee_id',
 		'goal',

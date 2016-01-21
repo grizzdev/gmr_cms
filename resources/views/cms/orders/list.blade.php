@@ -25,7 +25,7 @@
 		data-show-refresh="true"
 		data-show-columns="true"
 		data-show-export="true"
-		data-search="false"
+		data-search="true"
 		data-mobile-responsive="true"
 		data-check-on-init="true"
 		data-columns-hidden=[]

@@ -94,7 +94,9 @@ class HeroController extends Controller {
 			'youtube_url' => $request->input('youtube_url'),
 			'caringbridge_url' => $request->input('caringbridge_url'),
 			'overview' => $request->input('overview'),
-			'description' => $request->input('description')
+			'description' => $request->input('description'),
+			'hospital_name' => $request->input('hospital_name'),
+			'hospital_location' => $request->input('hospital_location')
 		]);
 
 		$hero->save();
