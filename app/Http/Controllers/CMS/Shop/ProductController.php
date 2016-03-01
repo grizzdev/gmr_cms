@@ -53,10 +53,12 @@ class ProductController extends Controller {
 
 		DB::table('attribute_product')->where('product_id', '=', $product->id)->delete();
 
-		DB::table('attribute_product')->insert([
-			'product_id' => $product->id,
-			'attribute_id' => 39
-		]);
+		if (!in_array($product->id, [221, 220])) {
+			DB::table('attribute_product')->insert([
+				'product_id' => $product->id,
+				'attribute_id' => 39
+			]);
+		}
 
 		if (is_array($request->input('attribute'))) {
 			foreach ($request->input('attribute') as $id => $attrs) {
