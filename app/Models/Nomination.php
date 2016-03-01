@@ -5,6 +5,7 @@ namespace App\Models;
 use DB;
 use GrizzDev\CMS\Model;
 use App\Models\Hero;
+use App\Models\Location;
 
 class Nomination extends Model {
 
@@ -42,6 +43,13 @@ class Nomination extends Model {
 	];
 
 	protected $listConfig = [
+		'id' => [
+			'label' => '',
+			'sortable' => false,
+			'format' => 'nominationFormatter',
+			'mobile' => true,
+			'switchable' => false
+		],
 		'name' => [
 			'label' => 'Name',
 			'sortable' => true,
@@ -79,23 +87,22 @@ class Nomination extends Model {
 			'format' => 'datetimeFormatter',
 			'mobile' => false,
 			'switchable' => true
-		],
-		'id' => [
-			'label' => '',
-			'sortable' => false,
-			'format' => 'nominationFormatter',
-			'mobile' => true,
-			'switchable' => false
 		]
 	];
 
-	public function address() {
+	public function state() {
+		return $this->belongsTo('App\Models\Location', 'state_id');
 	}
 
 	public function hospital() {
 	}
 
 	public function nominee() {
+		return $this->belongsTo('App\Models\User', 'nominee_id');
+	}
+
+	public function image() {
+		return $this->belongsTo('App\Models\File', 'file_id');
 	}
 
 	public function toHero() {

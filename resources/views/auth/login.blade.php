@@ -27,8 +27,12 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-sm-3 col-sm-offset-3">
-				{!! Form::checkbox('remember') !!}
-				{!! Form::label('remember', 'Remember Me', ['class' => 'control-label']) !!}
+				<div class="checkbox">
+					<label>
+						{!! Form::checkbox('remember') !!}
+						<b>Remember Me</b>
+					</label>
+				</div>
 			</div>
 			<div class="col-xs-6 col-sm-3 text-right">
 				{!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}

@@ -47,7 +47,13 @@ class NominationController extends Controller {
 	 * @return Response
 	 */
 	public function show($id) {
-		return Form::render(Nomination::find($id));
+		$nomination = Nomination::find($id);
+
+		if ($nomination) {
+			return view('cms.nomination', ['nomination' => Nomination::find($id)]);
+		} else {
+			return redirect('/nominations');
+		}
 	}
 
 	/**

@@ -131,9 +131,7 @@ function locationTypeFormatter(value) {
 }
 
 function nominationFormatter(value) {
-	return (value)
-		? '<a href="'+value+'/approve" title="Approve" class="success"><i class="glyphicon glyphicon-ok"></i></a>&nbsp;&nbsp;<a href="'+value+'/deny" title="Deny" class="danger"><i class="glyphicon glyphicon-remove"></i></a>'
-		: null;
+	return (value) ? '<a href="'+value+'/approve" title="Approve" class="success"><i class="glyphicon glyphicon-ok"></i></a>&nbsp;&nbsp;<a href="'+value+'/deny" title="Deny" class="danger"><i class="glyphicon glyphicon-remove"></i></a>&nbsp;&nbsp;<a href="'+value+'" title="View" class=""><i class="glyphicon glyphicon-eye-open"></i></a>' : null;
 }
 
 function amountFormatter(value) {

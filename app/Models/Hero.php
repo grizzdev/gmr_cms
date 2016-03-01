@@ -41,10 +41,10 @@ class Hero extends Model implements SluggableInterface {
 		'nominee_id',
 		'goal',
 		'raised',
-                'address',
-                'city',
-                'state_id',
-                'zip'
+		'address',
+		'city',
+		'state_id',
+		'zip'
 	];
 
 	protected $hidden = [
