@@ -68,7 +68,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			'type' => 'password',
 			'confirmed' => true,
 			'required' => false,
-			'disabled' => true
+			'disabled' => false
 		],
 	];
 
@@ -111,5 +111,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			'switchable' => true
 		]
 	];
+
+	public function orders() {
+		return $this->hasMany('App\Models\Order');
+	}
 
 }

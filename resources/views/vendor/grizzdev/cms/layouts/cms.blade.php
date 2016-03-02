@@ -57,6 +57,9 @@
 										<li>
 											<a href="{{ url('nominations') }}">Nominations</a>
 										</li>
+										<li>
+											<a href="{{ url('site/users') }}">Users</a>
+										</li>
 										@endif
 										<!--<li>
 											<a href="{{ url('packages') }}">Packages</a>
@@ -78,6 +81,9 @@
 										@if(Auth::user()->can('orders'))
 										<li>
 											<a href="{{ url('shop/orders') }}">Orders</a>
+										</li>
+										<li>
+											<a href="{{ url('site/users') }}">Users</a>
 										</li>
 										<li role="separator" class="divider"></li>
 										@endif
