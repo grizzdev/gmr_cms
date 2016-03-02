@@ -76,6 +76,11 @@ Route::group([
 		], function() {
 			Route::post('orders/create', 'OrderController@store');
 			Route::resource('orders', 'OrderController');
+
+			Route::get('reports', function() {
+				return redirect('shop/reports/orders');
+			});
+			Route::any('reports/orders', 'ReportController@orders');
 		});
 	});
 

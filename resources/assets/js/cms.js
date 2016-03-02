@@ -6,6 +6,14 @@ $.ajaxSetup({
 	}
 });
 
+$('input.typeahead').each(function(i, it) {
+	$.get($(it).data('url'), function(data) {
+		$(it).typeahead({
+			source: data
+		})
+	}, 'json');
+});
+
 $('.model-form, .login-form').validator({
 	disable: true
 }).on('submit', function(e) {

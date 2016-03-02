@@ -18,7 +18,7 @@ elixir(function(mix) {
 		'bootstrap/extensions/tables-export.js',
 		'bootstrap/extensions/tables-mobile.js',
 		'bootstrap/extensions/tables-reorder.js',
-		//'bootstrap/extensions/tables-toolbar.js',
+		'bootstrap/typeahead.js',
 		'trumbowyg/trumbowyg.js',
 		'trumbowyg/plugins/trumbowyg.upload.js',
 		'jspdf.js',

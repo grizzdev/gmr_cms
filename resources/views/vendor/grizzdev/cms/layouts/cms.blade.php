@@ -44,7 +44,7 @@
 						<div class="collapse navbar-collapse">
 							@if(Auth::check())
 							<ul class="nav navbar-nav">
-								<li class="active">
+								<li class="">
 									<a href="{{ url() }}"><i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span></a>
 								</li>
 								<li class="dropdown">
@@ -61,18 +61,20 @@
 											<a href="{{ url('site/users') }}">Users</a>
 										</li>
 										@endif
-										<!--<li>
+										{{--
+										<li>
 											<a href="{{ url('packages') }}">Packages</a>
-										</li>-->
-										<!--<li>
+										</li>
+										<li>
 											<a href="{{ url('hospitals') }}">Hospitals</a>
-										</li>-->
-										<!--<li>
+										</li>
+										<li>
 											<a href="{{ url('team') }}">Team</a>
-										</li>-->
-										<!--<li>
+										</li>
+										<li>
 											<a href="{{ url('faqs') }}">FAQs</a>
-										</li>-->
+										</li>
+										--}}
 									</ul>
 								</li>
 								<li class="dropdown">
@@ -104,9 +106,28 @@
 											<a href="{{ url('shop/tags') }}">Tags</a>
 										</li>
 										@endif
+										@if(Auth::user()->can('orders'))
+										<li role="separator" class="divider"></li>
+										<li class="dropdown-submenu">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="{{ url('shop/reports/orders') }}">Orders</a>
+												</li>
+												{{--
+												<li>
+													<a href="{{ url('shop/reports/users') }}">Users</a>
+												</li>
+												<li>
+													<a href="{{ url('shop/reports/heroes') }}">Heroes</a>
+												</li>
+												--}}
+											</ul>
+										</li>
+										@endif
 									</ul>
 								</li>
-								<!--
+								{{--
 								@if(Auth::user()->hasRole('admin'))
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site <i class="caret"></i></a>
@@ -135,7 +156,7 @@
 									</ul>
 								</li>
 								@endif
-								-->
+								--}}
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
