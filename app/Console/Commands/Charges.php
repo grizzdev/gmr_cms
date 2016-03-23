@@ -32,47 +32,50 @@ class Charges extends Command {
 	public function handle() {
 		echo "\n".date('Y-m-d h:i:s')." Processing Charges\n";
 
-		$order = Order::whereNotIn('status_id', [3,4,5])->where('payment_status_id', '=', 1)->first();
+		$order = Order::whereNotIn('status_id', [4,5])->where('id', '>', 4672)->where('payment_status_id', '=', 1)->first();
+		//$orders = Order::whereNotIn('status_id', [3,4,5])->where('payment_status_id', '=', 1)->get();
 
 		if (!$order) {
+		//if (!$orders->count()) {
 			echo "\tNo Pending Orders\n";
 			exit();
 		}
 
-		echo "\tOrder: {$order->id}\n";
-		echo "\tTotal: $".$order->cart->total()."\n";
+		//foreach ($orders as $order) {
+			echo "\tOrder: {$order->id}\n";
+			echo "\tTotal: $".$order->cart->total()."\n";
 
-		if ($order->payment_method_id == 1 && !preg_match('/tok_/', $order->payment_token)) {
-			$order->payment_method_id = 2;
-			$order->status_id = 4;
-			$order->payment_status_id = 8;
-			$order->save();
-			exit();
-		}
-
-		$has_donation = false;
-		$only_donation = true;
-
-		foreach ($order->cart->items as $item) {
-			if ($item->product->id == 1) {
-				$has_donation = true;
-			} else {
-				$only_donation = false;
+			if ($order->payment_method_id == 1 && !preg_match('/tok_/', $order->payment_token)) {
+				$order->payment_method_id = 2;
+				$order->status_id = 4;
+				$order->payment_status_id = 8;
+				$order->save();
+				exit();
 			}
-		}
 
-		if ($order->payment_method_id == 1) { // Stripe
-			echo "\tProcessing via Stripe\n";
-			Stripe::setApiKey(config('services.stripe.secret'));
+			$has_donation = false;
+			$only_donation = true;
 
-			$charge_data = [
+			foreach ($order->cart->items as $item) {
+				if ($item->product->id == 1) {
+					$has_donation = true;
+				} else {
+					$only_donation = false;
+				}
+			}
+
+			if ($order->payment_method_id == 1) { // Stripe
+				echo "\tProcessing via Stripe\n";
+				Stripe::setApiKey(config('services.stripe.secret'));
+
+				$charge_data = [
 					'source' => $order->payment_token,
 					'amount' => ($order->cart->total() * 100),
 					'currency' => 'usd',
 					'description' => 'Gamerosity Order #'.$order->id
-			];
+				];
 
-			try {
+				try {
 					$charge = Charge::create($charge_data);
 					$data = json_decode(preg_replace('/Stripe.*: {/', '{', $charge));
 
@@ -86,7 +89,7 @@ class Charges extends Command {
 					$order->save();
 
 					echo "\tCharge successful: {$data->id}\n";
-			} catch(\Stripe\Error\Card $e) {
+				} catch(\Stripe\Error\Card $e) {
 					$body = $e->getJsonBody();
 					$err = $body['error'];
 
@@ -96,7 +99,7 @@ class Charges extends Command {
 					$order->save();
 
 					echo "\tCharge Result: {$err['message']}\n";
-			} catch (\Stripe\Error\InvalidRequest $e) {
+				} catch (\Stripe\Error\InvalidRequest $e) {
 					$body = $e->getJsonBody();
 					$err = $body['error'];
 
@@ -104,45 +107,46 @@ class Charges extends Command {
 					$order->save();
 
 					echo "\tCharge Result: {$err['message']}\n";
-			} catch (\Stripe\Error\Authentication $e) {
+				} catch (\Stripe\Error\Authentication $e) {
 					// Authentication with Stripe's API failed
 					// (maybe you changed API keys recently)
-			} catch (\Stripe\Error\ApiConnection $e) {
+				} catch (\Stripe\Error\ApiConnection $e) {
 					// Network communication with Stripe failed
-			} catch (\Stripe\Error\Base $e) {
+				} catch (\Stripe\Error\Base $e) {
 					// Display a very generic error to the user, and maybe send
 					// yourself an email
-			} catch (Exception $e) {
+				} catch (Exception $e) {
 					// Something else happened, completely unrelated to Stripe
+				}
+			} elseif ($order->payment_method_id == 2) { // PayPal
+				echo "\tProcessing via PayPal\n";
+
+				$response = (new Client())->get(env('PAYPAL_URL'), [
+					'verify' => false,
+					'query' => [
+						'USER' => env('PAYPAL_USER'),
+						'PWD' => env('PAYPAL_PWD'),
+						'SIGNATURE' => env('PAYPAL_SIGNATURE'),
+						'METHOD' => 'DoExpressCheckoutPayment',
+						'VERSION' => 93,
+						'TOKEN' => $order->payment_token,
+						'PAYERID' => $order->payer_id,
+						'PAYMENTREQUEST_0_PAYMENTACTION' => 'SALE',
+						'PAYMENTREQUEST_0_AMT' => $order->cart->total(),
+						'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
+					]
+				]);
+
+				//print_r($response);
+
+				$order->payment_status_id = 7;
+
+				if ($has_donation && $only_donation) {
+					$order->status_id = 3;
+				}
+
+				$order->save();
 			}
-		} elseif ($order->payment_method_id == 2) { // PayPal
-			echo "\tProcessing via PayPal\n";
-
-			$response = (new Client())->get(env('PAYPAL_URL'), [
-				'verify' => false,
-				'query' => [
-					'USER' => env('PAYPAL_USER'),
-					'PWD' => env('PAYPAL_PWD'),
-					'SIGNATURE' => env('PAYPAL_SIGNATURE'),
-					'METHOD' => 'DoExpressCheckoutPayment',
-					'VERSION' => 93,
-					'TOKEN' => $order->payment_token,
-					'PAYERID' => $order->payer_id,
-					'PAYMENTREQUEST_0_PAYMENTACTION' => 'SALE',
-					'PAYMENTREQUEST_0_AMT' => $order->cart->total(),
-					'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
-				]
-			]);
-
-			//print_r($response);
-
-			$order->payment_status_id = 7;
-
-			if ($has_donation && $only_donation) {
-				$order->status_id = 3;
-			}
-
-			$order->save();
-		}
+		//}
 	}
 }
