@@ -33,6 +33,7 @@ class Product extends Model implements SluggableInterface {
 	protected $sluggable = [
 		'build_from' => 'name',
 		'save_to' => 'sku',
+		'on_update' => false
 	];
 
 	public $listConfig = [
