@@ -114,6 +114,9 @@
 												<li>
 													<a href="{{ url('shop/reports/orders') }}">Orders</a>
 												</li>
+												<li>
+													<a href="{{ url('shop/reports/products') }}">Products</a>
+												</li>
 												{{--
 												<li>
 													<a href="{{ url('shop/reports/users') }}">Users</a>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use GrizzDev\CMS\Model;
 
 class Order extends Model {
@@ -101,6 +102,23 @@ class Order extends Model {
 
 	public function payment() {
 		return $this->belongsTo('App\Models\PaymentMethod', 'payment_method_id');
+	}
+
+	public function getHasProduct($product_id, $start = null, $end = null) {
+		$start = (empty($start)) ? $start = mktime(0,0,0,0,0,0) : $start = strtotime($start);
+		$end = (empty($end)) ? mktime(11,59,59,12,31,2021) : strtotime($end);
+
+		$cart_ids = [];
+
+		foreach(Item::where('product_id', '=', $product_id)->get() as $item) {
+			$cart_ids[] = $item->cart->id;
+		}
+
+		return $this->whereIn('status_id', [1, 2, 3])
+			->where('created_at', '>=', Carbon::createFromTimestamp($start)->toDateString())
+			->where('created_at', '<=', Carbon::createFromTimestamp($end)->toDateString())
+			->whereIn('cart_id', $cart_ids)->orderBy('created_at', 'asc')
+			->get();
 	}
 
 }

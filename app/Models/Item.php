@@ -71,4 +71,8 @@ class Item extends Model {
 		return $this->belongsTo('\App\Models\Status');
 	}
 
+	public function cart() {
+		return $this->belongsTo('\App\Models\Cart');
+	}
+
 }

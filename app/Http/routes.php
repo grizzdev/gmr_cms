@@ -81,6 +81,7 @@ Route::group([
 				return redirect('shop/reports/orders');
 			});
 			Route::any('reports/orders', 'ReportController@orders');
+			Route::any('reports/products', 'ReportController@products');
 		});
 	});
 
