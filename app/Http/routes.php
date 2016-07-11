@@ -85,6 +85,12 @@ Route::group([
 		});
 	});
 
+	Route::get('events', 'EventController@index');
+	Route::get('event/create', 'EventController@create');
+	Route::post('event/create', 'EventController@store');
+	Route::get('event/{id}', 'EventController@event');
+	Route::post('event/{id}', 'EventController@update');
+
 	Route::get('', 'DashboardController@index');
 	Route::post('orders/data', 'Shop\OrderController@data');
 	Route::post('{model}/data', 'DashboardController@data');
