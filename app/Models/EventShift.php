@@ -7,24 +7,24 @@ use GrizzDev\CMS\Model;
 class EventShift extends Model {
 
 	protected $fillable = [
-		'job_id',
+		'event_job_id',
+		'user_id',
 		'start_at',
-		'end_at',
-		'user_id'
+		'end_at'
 	];
 
 	protected $casts = [
-		'job_id' => 'integer',
+		'event_job_id' => 'integer',
+		'user_id' => 'integer',
 		'start_at' => 'date',
-		'end_at' => 'date',
-		'user_id' => 'integer'
+		'end_at' => 'date'
 	];
 
 	protected $rules = [
-		'job_id' => 'integer,exists:event_jobs',
+		'event_job_id' => 'integer,exists:event_jobs',
+		'user_id' => 'integer,exists:users',
 		'start_at' => 'date',
-		'end_at' => 'date',
-		'user_id' => 'integer,exists:users'
+		'end_at' => 'date'
 	];
 
 	protected $dates = [
@@ -34,11 +34,11 @@ class EventShift extends Model {
 	];
 
 	public function job() {
-		return $this->belongsTo('\App\Models\EventJob');
+		return $this->belongsTo('\App\Models\EventJob', 'event_job_id');
 	}
 
 	public function event() {
-		return $this->job->event;
+		return $this->job->event();
 	}
 
 	public function staff() {

@@ -20,7 +20,7 @@ class EventJob extends Model {
 
 	protected $rules = [
 		'title' => 'string,max:64',
-		'description' => 'string,NULL'
+		'description' => 'string,NULL',
 		'event_id' => 'integer,exists:events'
 	];
 

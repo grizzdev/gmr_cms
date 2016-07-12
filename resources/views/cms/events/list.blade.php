@@ -1,55 +1,35 @@
 @extends('vendor.grizzdev.cms.layouts.cms')
 
 @section('content')
+<br />
 <div id="table-toolbar">
-	<?php /*
-	<div class="form-inline" role="form">
-		{!! Form::select('status_id', [0 => 'Status', 1 => 'Pending', 2 => 'Processing', 4 => 'On-Hold', 5 => 'Cancelled', 3 => 'Completed'], null, ['class' => 'form-control']) !!}
-		{!! Form::select('payment_status_id', [0 => 'Payment Status', 1 => 'Pending', 6 => 'Refunded', 7 => 'Charged', 8 => 'Declined'], null, ['class' => 'form-control']) !!}
-		{!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Search']) !!}
-		{!! Form::submit('Go', ['class' => 'btn btn-default', 'id' => 'btn-filter']) !!}
-	</div>
-	*/ ?>
+	<a href="/event/create" class="btn btn-default" title="New Event"><i class="fa fa-plus"></i></a>
 </div>
+<br />
 <div class="table-responsive">
-	<table
-		id="table"
-		class="table"
-		data-toggle="table"
-		data-side-pagination="server"
-		data-pagination="true"
-		data-url="/event/data"
-		data-striped="true"
-		data-page-size="24"
-		data-page-list="[12, 24, 48, 96]"
-		data-show-refresh="true"
-		data-show-columns="true"
-		data-show-export="true"
-		data-search="true"
-		data-mobile-responsive="true"
-		data-check-on-init="true"
-		data-columns-hidden=[]
-		data-id-field="id"
-		data-toolbar="#table-toolbar"
-		data-reorderable-columns="true"
-		data-method="post"
-		data-query-params-type="laravel"
-		data-toolbar="#table-toolbar"
-		data-undefined-text=""
-		data-filter-control="true"
-	>
+	<table id="table" class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				@foreach($model->getListConfig() as $field => $data)
-				<th
-					data-field="{{ $field }}"
-					data-sortable="{{ $data['sortable'] }}"
-					data-switchable="{{ $data['switchable'] }}"
-					@if($data['format']) data-formatter="{{ $data['format'] }}" @endif
-				>{!! $data['label'] !!}</th>
-				@endforeach
+				<th></th>
+				<th>Event</th>
+				<th>Start</th>
+				<th>End</th>
+				<th>Location</th>
+				<th>Lead</th>
 			</tr>
 		</thead>
+		<tbody>
+		@foreach($events as $event)
+			<tr>
+				<td><a href="/event/{!! $event->id !!}"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+				<td>{!! $event->title !!}</td>
+				<td>{!! $event->start_at->format('m/d/Y h:i a') !!}</td>
+				<td>{!! $event->end_at->format('m/d/Y h:i a') !!}</td>
+				<td>{!! $event->location !!}</td>
+				<td>{!! $event->lead->name !!}</td>
+			</tr>
+		@endforeach
+		</tbody>
 	</table>
 </div>
 <script>

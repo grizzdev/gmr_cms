@@ -130,6 +130,9 @@
 										@endif
 									</ul>
 								</li>
+								<li>
+									<a href="{{ url('events') }}">Events</a>
+								</li>
 								{{--
 								@if(Auth::user()->hasRole('admin'))
 								<li class="dropdown">

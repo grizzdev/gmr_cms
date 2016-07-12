@@ -85,11 +85,29 @@ Route::group([
 		});
 	});
 
-	Route::get('events', 'EventController@index');
-	Route::get('event/create', 'EventController@create');
-	Route::post('event/create', 'EventController@store');
-	Route::get('event/{id}', 'EventController@event');
-	Route::post('event/{id}', 'EventController@update');
+	Route::get('events', 'Events\EventController@index');
+	Route::get('events/{id}', function($id) {
+		return redirect()->to('/event/'.$id);
+	});
+	Route::group([
+		'prefix' => 'event',
+		'namespace' => 'Events'
+	], function() {
+		Route::get('create', 'EventController@create');
+		Route::post('create', 'EventController@store');
+		Route::get('{id}', 'EventController@event');
+		Route::put('{id}', 'EventController@update');
+
+		Route::get('{event_id}/job/create', 'JobController@create');
+		Route::post('{event_id}/job/create', 'JobController@store');
+		Route::get('{event_id}/job/{id}', 'JobController@job');
+		Route::put('{event_id}/job/{id}', 'JobController@update');
+
+		Route::get('{event_id}/shift/create', 'ShiftController@create');
+		Route::post('{event_id}/shift/create', 'ShiftController@store');
+		Route::get('{event_id}/shift/{id}', 'ShiftController@shift');
+		Route::put('{event_id}/shift/{id}', 'ShiftController@update');
+	});
 
 	Route::get('', 'DashboardController@index');
 	Route::post('orders/data', 'Shop\OrderController@data');
