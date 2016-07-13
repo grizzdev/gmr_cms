@@ -13,10 +13,17 @@
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-sm-12 col-md-6">
 					{!! Form::label('event_job_id', 'Job', ['class' => 'control-label']) !!}
 					<div class="form-group has-feedback">
 						{!! Form::select('event_job_id', $jobs, null, ['class' => 'form-control', 'required']) !!}
+						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6">
+					{!! Form::label('user_id', 'Volunteer', ['class' => 'control-label']) !!}
+					<div class="form-group has-feedback">
+						{!! Form::select('user_id', $users, $shift->user_id, ['class' => 'form-control']) !!}
 						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					</div>
 				</div>

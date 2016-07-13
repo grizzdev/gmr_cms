@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Response;
 use Carbon\Carbon;
 use Datatables;
+use App\Models\User;
 use App\Models\Event;
 use App\Models\EventJob as Job;
 use App\Models\EventShift as Shift;
@@ -47,7 +48,8 @@ class ShiftController extends Controller {
 			return view('cms.events.shifts.shift', [
 				'shift' => $shift,
 				'jobs' => ['' => ''] + Job::where('event_id', '=', $event->id)->lists('title', 'id')->toArray(),
-				'event' => $event
+				'event' => $event,
+				'users' => ['' => ''] + User::orderBy('name')->lists('name', 'id')->toArray()
 			]);
 		} else {
 			return redirect()->back();
@@ -61,7 +63,8 @@ class ShiftController extends Controller {
 			$shift->update([
 				'event_job_id' => $request->input('event_job_id'),
 				'start_at' => date('Y-m-d h:i:s', strtotime($request->input('start_at'))),
-				'end_at' => date('Y-m-d h:i:s', strtotime($request->input('end_at')))
+				'end_at' => date('Y-m-d h:i:s', strtotime($request->input('end_at'))),
+				'user_id' => $request->input('user_id')
 			]);
 		}
 
