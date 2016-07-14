@@ -33,8 +33,8 @@ class ShiftController extends Controller {
 	public function store(Request $request, $event_id) {
 		Shift::create([
 			'event_job_id' => $request->input('event_job_id'),
-			'start_at' => date('Y-m-d h:i:s', strtotime($request->input('start_at'))),
-			'end_at' => date('Y-m-d h:i:s', strtotime($request->input('end_at')))
+			'start_at' => date('Y-m-d H:i:s', strtotime($request->input('start_at'))),
+			'end_at' => date('Y-m-d H:i:s', strtotime($request->input('end_at')))
 		]);
 
 		return Response::json(['href' => url('event/'.$event_id)]);
@@ -62,8 +62,8 @@ class ShiftController extends Controller {
 		if ($shift) {
 			$shift->update([
 				'event_job_id' => $request->input('event_job_id'),
-				'start_at' => date('Y-m-d h:i:s', strtotime($request->input('start_at'))),
-				'end_at' => date('Y-m-d h:i:s', strtotime($request->input('end_at'))),
+				'start_at' => date('Y-m-d H:i:s', strtotime($request->input('start_at'))),
+				'end_at' => date('Y-m-d H:i:s', strtotime($request->input('end_at'))),
 				'user_id' => $request->input('user_id')
 			]);
 		}
