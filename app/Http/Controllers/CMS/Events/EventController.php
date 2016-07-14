@@ -37,8 +37,8 @@ class EventController extends Controller {
 			'state_id' => $request->input('state_id'),
 			'zip' => $request->input('zip'),
 			'lead_id' => $request->input('lead_id'),
-			'start_at' => date('Y-m-d h:i:s', strtotime($request->input('start_at'))),
-			'end_at' => date('Y-m-d h:i:s', strtotime($request->input('end_at')))
+			'start_at' => date('Y-m-d H:i:s', strtotime($request->input('start_at'))),
+			'end_at' => date('Y-m-d H:i:s', strtotime($request->input('end_at')))
 		]);
 
 		return Response::json(['href' => url('event/'.$event->id)]);
@@ -73,8 +73,8 @@ class EventController extends Controller {
 				'state_id' => $request->input('state_id'),
 				'zip' => $request->input('zip'),
 				'lead_id' => $request->input('lead_id'),
-				'start_at' => date('Y-m-d h:i:s', strtotime($request->input('start_at'))),
-				'end_at' => date('Y-m-d h:i:s', strtotime($request->input('end_at')))
+				'start_at' => date('Y-m-d H:i:s', strtotime($request->input('start_at'))),
+				'end_at' => date('Y-m-d H:i:s', strtotime($request->input('end_at')))
 			]);
 
 			return Response::json(['href' => url('event/'.$event->id)]);
