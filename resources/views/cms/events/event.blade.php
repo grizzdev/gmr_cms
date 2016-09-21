@@ -145,6 +145,7 @@
 										<th>Job</th>
 										<th>Start</th>
 										<th>End</th>
+										<th>Volunteer</th>
 									</thead>
 									<tbody>
 									@foreach($event->shifts as $shift)
@@ -153,6 +154,7 @@
 											<td>{!! $shift->job->title !!}</td>
 											<td>{!! $shift->start_at->format('m/d/Y, h:i A') !!}</td>
 											<td>{!! $shift->end_at->format('m/d/Y, h:i A') !!}</td>
+											<td>{!! ($shift->user_id) ? $shift->staff->name : null !!}</td>
 										</tr>
 									@endforeach
 									</tbody>
