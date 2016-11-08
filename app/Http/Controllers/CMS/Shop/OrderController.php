@@ -68,8 +68,14 @@ class OrderController extends Controller {
 		$orders = Order::skip($request->input('skip'))->take($request->input('take'))
 			->join('statuses AS status', 'neworders.status_id', '=', 'status.id')
 			->join('users AS user', 'neworders.user_id', '=', 'user.id')
+			->join('addresses AS shipping_address', 'neworders.shipping_address_id', '=', 'shipping_address.id')
 			->join('statuses AS payment_status', 'neworders.payment_status_id', '=', 'payment_status.id')
-			->select('neworders.*', 'status.name AS status', 'user.name AS user', 'payment_status.name AS payment_status');
+			->select(
+				'neworders.*',
+				'status.name AS status',
+				'user.name AS user',
+				'payment_status.name AS payment_status'
+			);
 
 		if ($request->input('status_id') != 0) {
 			$orders->where('status_id', '=', $request->input('status_id'));

@@ -1,4 +1,4 @@
-<?
+<?php
 if ($model->$field) {
 	$value = date('Y-m-d', strtotime($model->$field));
 } else {

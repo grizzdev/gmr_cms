@@ -42,19 +42,26 @@ class Order extends Model {
 			'mobile' => true,
 			'switchable' => false
 		],
+		'shipping_address' => [
+			'label' => 'Ship Address',
+			'sortable' => false,
+			'format' => null,
+			'mobile' => false,
+			'switchable' => true
+		],
 		'status' => [
 			'label' => 'Status',
 			'sortable' => true,
 			'format' => null,
 			'mobile' => true,
-			'switchable' => false
+			'switchable' => true
 		],
 		'payment_status' => [
 			'label' => 'Payment Status',
 			'sortable' => true,
 			'format' => null,
 			'mobile' => true,
-			'switchable' => false
+			'switchable' => true
 		],
 		'created_at' => [
 			'label' => 'Order Date',
