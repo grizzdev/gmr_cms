@@ -24,6 +24,12 @@ class Order extends Model {
 		'notes'
 	];
 
+	public $hiddenColumns = [
+		'shipping_address',
+		'billing_address',
+		'updated_at'
+	];
+
 	protected $formConfig = [
 	];
 
@@ -42,13 +48,20 @@ class Order extends Model {
 			'mobile' => true,
 			'switchable' => false
 		],
-		'shipping_address' => [
+		/*'shipping_address' => [
 			'label' => 'Ship Address',
 			'sortable' => false,
 			'format' => null,
 			'mobile' => false,
 			'switchable' => true
 		],
+		'billing_address' => [
+			'label' => 'Bill Address',
+			'sortable' => false,
+			'format' => null,
+			'mobile' => false,
+			'switchable' => true
+		],*/
 		'status' => [
 			'label' => 'Status',
 			'sortable' => true,

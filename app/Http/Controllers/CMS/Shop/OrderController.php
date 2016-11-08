@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS\Shop;
 
 use Illuminate\Http\Request;
 
+use DB;
 use Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -69,13 +70,22 @@ class OrderController extends Controller {
 			->join('statuses AS status', 'neworders.status_id', '=', 'status.id')
 			->join('users AS user', 'neworders.user_id', '=', 'user.id')
 			->join('addresses AS shipping_address', 'neworders.shipping_address_id', '=', 'shipping_address.id')
+			->join('addresses AS billing_address', 'neworders.billing_address_id', '=', 'billing_address.id')
+			->join('states AS shipping_state', 'shipping_address.state_id', '=', 'shipping_state.id')
+			->join('states AS billing_state', 'billing_address.state_id', '=', 'billing_state.id')
 			->join('statuses AS payment_status', 'neworders.payment_status_id', '=', 'payment_status.id')
-			->select(
-				'neworders.*',
-				'status.name AS status',
-				'user.name AS user',
-				'payment_status.name AS payment_status'
-			);
+			->select(DB::raw("
+				neworders.*,
+				status.name AS status,
+				user.name AS user,
+				payment_status.name AS payment_status,
+				CONCAT(billing_address.address_1, ', ', billing_address.city, ', ', billing_state.name, ' ', billing_address.zip) AS billing_address,
+				CONCAT(shipping_address.address_1, ', ', shipping_address.city, ', ', shipping_state.name, ' ', shipping_address.zip) AS shipping_address
+			"));
+
+		foreach ($orders as $key => $order) {
+			$orders[$key]['shipping_address'] = $order->address.', '.$order->city.', '.$order->state.' '.$order->zip;
+		}
 
 		if ($request->input('status_id') != 0) {
 			$orders->where('status_id', '=', $request->input('status_id'));

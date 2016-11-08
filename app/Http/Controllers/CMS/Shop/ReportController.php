@@ -16,11 +16,16 @@ class ReportController extends Controller
 	public function orders(Request $request) {
 		if ($request->input('user_name')) {
 			$users = User::where('name', 'LIKE' , '%'.$request->input('user_name').'%')->get();
+			$orders = null;
+		} elseif($request->input('start_at') && $request->input('end_at')) {
+			$users = null;
+			$orders = Order::where('created_at', '>=', $request->input('start_at').' 00:00:00')->where('created_at', '<=', $request->input('end_at').' 23:59:59')->get();
 		} else {
 			$users = null;
+			$orders = null;
 		}
 
-		return view('cms.reports.orders', ['request' => $request, 'users' => $users]);
+		return view('cms.reports.orders', ['request' => $request, 'users' => $users, 'orders' => $orders]);
 	}
 
 	public function products(Request $request) {
