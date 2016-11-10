@@ -69,18 +69,8 @@
 				<tr>
 					<td>{{ $order->id }}</td>
 					<td>{{ $order->user->name }}</td>
-					<td>
-						{{ $order->shipping_address->address_1 }},
-						{{ $order->shipping_address->city }},
-						{{ $order->shipping_address->state->name }}
-						{{ $order->shipping_address->zip }}
-					</td>
-					<td>
-						{{ $order->billing_address->address_1 }},
-						{{ $order->billing_address->city }},
-						{{ $order->billing_address->state->name }}
-						{{ $order->billing_address->zip }}
-					</td>
+					<td>{{ $order->shipping_address->address_1 }}, {{ $order->shipping_address->city }}, {{ $order->shipping_address->state->name }} {{ $order->shipping_address->zip }}</td>
+					<td>{{ $order->billing_address->address_1 }}, {{ $order->billing_address->city }}, {{ $order->billing_address->state->name }} {{ $order->billing_address->zip }}</td>
 					<td>{{ $order->created_at->format('m/d/y g:i a') }}</td>
 				</tr>
 				@endforeach
